@@ -1,18 +1,14 @@
 #!/bin/sh
 
-echo "[INFO] Starting OpenCode (Version 1.2.8)..."
+echo "[INFO] Starting OpenCode Ingress Proxy Setup..."
 
-# 1. Read Password from HA options
-# Using a slightly more robust sed pattern
+# 1. Read Password
 PASSWORD=$(sed -n 's/.*"password": *"\([^"]*\)".*/\1/p' /data/options.json)
-PASSWORD_FINAL="${PASSWORD:-change_me_immediately}"
+export OPENCODE_SERVER_PASSWORD="${PASSWORD:-change_me_immediately}"
 
-# 2. Export environment variables (OpenCode ONLY supports these for auth)
-export OPENCODE_SERVER_PASSWORD="$PASSWORD_FINAL"
-export OPENCODE_SERVER_USERNAME="opencode"
+# 2. Start Nginx in background
+nginx -c /etc/nginx/nginx.conf &
 
-# 3. Launch
-echo "[INFO] Launching headless server on port 4096..."
-# Using 'serve' instead of 'web' for headless Docker environments
-# Removed non-existent flags --username and --password
-exec opencode serve --port 4096 --hostname 0.0.0.0
+# 3. Launch OpenCode on local loopback only
+echo "[INFO] Launching OpenCode server (Internal)..."
+exec opencode serve --port 4096 --hostname 127.0.0.1

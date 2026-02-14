@@ -2,9 +2,12 @@ FROM ghcr.io/anomalyco/opencode:latest
 
 USER root
 
-# Use /bin/sh because some minimal images don't include bash
+# Install Nginx for path rewriting
+RUN apt-get update && apt-get install -y --no-install-recommends nginx && rm -rf /var/lib/apt/lists/*
+
+# Copy Nginx config and startup script
+COPY rootfs/etc/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY rootfs/run.sh /run-opencode.sh
 RUN chmod a+x /run-opencode.sh
 
-# Completely wipe entrypoint and use a basic shell to launch
 ENTRYPOINT ["/bin/sh", "/run-opencode.sh"]
