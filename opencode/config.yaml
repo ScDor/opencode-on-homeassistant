@@ -1,6 +1,6 @@
 name: "OpenCode"
 description: "High-performance AI server (Ingress Secured)"
-version: "1.3.5"
+version: "1.3.6"
 slug: "opencode"
 startup: services
 arch:
@@ -16,5 +16,7 @@ panel_icon: "mdi:robot-code"
 panel_title: "OpenCode"
 options:
   password: "change_me_immediately"
+  port: 4096
 schema:
   password: "str"
+  port: "int"
