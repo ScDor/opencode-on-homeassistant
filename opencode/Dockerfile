@@ -1,7 +1,6 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+# Hardcode the base image to avoid ARG BUILD_FROM issues in local/custom builds
+FROM ghcr.io/hassio-addons/debian-base:latest
 
-# Use Debian base for better binary compatibility
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         curl \
@@ -11,7 +10,6 @@ RUN apt-get update \
         libstdc++6 \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy root filesystem
 COPY rootfs /
 RUN chmod a+x /run.sh
 
