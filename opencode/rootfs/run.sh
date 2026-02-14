@@ -8,25 +8,13 @@ PORT=$(sed -n 's/.*"port": *\([0-9]*\).*/\1/p' /data/options.json)
 export OPENCODE_SERVER_PASSWORD="${PASSWORD:-change_me_immediately}"
 export PORT="${PORT:-4096}"
 
+echo "[INFO] Password: $OPENCODE_SERVER_PASSWORD"
+echo "[INFO] Port: $PORT"
+
 # 2. Start Nginx
 nginx -c /etc/nginx/nginx.conf &
 
 # 3. Launch OpenCode
-echo "[INFO] Launching server on port $PORT..."
-
-# Create config to ensure frontend uses localhost
-mkdir -p /data/config
-cat > /data/config/opencode.json << EOF
-{
-  "server": {
-    "hostname": "127.0.0.1",
-    "port": $PORT
-  }
-}
-EOF
-
-export OPENCODE_SERVER="http://127.0.0.1:$PORT"
-export OPENCODE_API="http://127.0.0.1:$PORT"
-export OPENCODE_CONFIG="/data/config/opencode.json"
+echo "[INFO] Launching opencode web on port $PORT..."
 
 exec opencode web --port "$PORT" --hostname 0.0.0.0 --cors "*"
