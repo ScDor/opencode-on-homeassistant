@@ -29,4 +29,4 @@ export OPENCODE_SERVER="http://127.0.0.1:$PORT"
 export OPENCODE_API="http://127.0.0.1:$PORT"
 export OPENCODE_CONFIG="/data/config/opencode.json"
 
-exec opencode serve --port "$PORT" --hostname 127.0.0.1 --cors "*"
+exec opencode web --port "$PORT" --hostname 0.0.0.0 --cors "*"

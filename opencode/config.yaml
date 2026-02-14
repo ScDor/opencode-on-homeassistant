@@ -1,6 +1,6 @@
 name: "OpenCode"
 description: "High-performance AI server (Ingress Secured)"
-version: "1.3.12"
+version: "1.3.13"
 slug: "opencode"
 startup: services
 arch:
