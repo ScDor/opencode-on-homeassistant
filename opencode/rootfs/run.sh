@@ -13,6 +13,20 @@ nginx -c /etc/nginx/nginx.conf &
 
 # 3. Launch OpenCode
 echo "[INFO] Launching server on port $PORT..."
-# OPENCODE_SERVER ensures the frontend connects to localhost instead of external HA domain
+
+# Create config to ensure frontend uses localhost
+mkdir -p /data/config
+cat > /data/config/opencode.json << EOF
+{
+  "server": {
+    "hostname": "127.0.0.1",
+    "port": $PORT
+  }
+}
+EOF
+
 export OPENCODE_SERVER="http://127.0.0.1:$PORT"
+export OPENCODE_API="http://127.0.0.1:$PORT"
+export OPENCODE_CONFIG="/data/config/opencode.json"
+
 exec opencode serve --port "$PORT" --hostname 127.0.0.1 --cors "*"
