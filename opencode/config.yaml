@@ -15,8 +15,6 @@ ingress_port: 8099
 panel_icon: "mdi:robot-code"
 panel_title: "OpenCode"
 options:
-  password: "change_me_immediately"
   port: 4096
 schema:
-  password: "str"
   port: "int"
