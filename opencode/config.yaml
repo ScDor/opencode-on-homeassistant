@@ -1,0 +1,20 @@
+name: "OpenCode"
+description: "High-performance, self-updating AI server"
+version: "1.0.3"
+slug: "opencode"
+startup: services
+arch:
+  - aarch64
+  - amd64
+init: false
+map:
+  - config:rw
+  - share:rw
+ingress: true
+ingress_port: 4096
+panel_icon: "mdi:robot-code"
+panel_title: "OpenCode"
+options:
+  password: "change_me_immediately"
+schema:
+  password: "str"
