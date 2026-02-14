@@ -1,6 +1,6 @@
 name: "OpenCode"
 description: "High-performance AI server (Powered by Anomalyco)"
-version: "1.2.8"
+version: "1.2.9"
 slug: "opencode"
 startup: services
 arch:
@@ -10,11 +10,14 @@ init: false
 map:
   - config:rw
   - share:rw
-ingress: true
-ingress_port: 4096
+ingress: false
 panel_icon: "mdi:robot-code"
 panel_title: "OpenCode"
 options:
   password: "change_me_immediately"
 schema:
   password: "str"
+ports:
+  4096/tcp: 4096
+ports_description:
+  4096/tcp: "OpenCode Web Interface (Direct Access)"
