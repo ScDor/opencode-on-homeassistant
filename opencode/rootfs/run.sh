@@ -3,9 +3,13 @@
 echo "Starting OpenCode..."
 
 PORT=$(sed -n 's/.*"port": *\([0-9]*\).*/\1/p' /data/options.json)
+PASSWORD=$(sed -n 's/.*"password": *"\([^"]*\)".*/\1/p' /data/options.json)
+
 export PORT="${PORT:-4096}"
+export OPENCODE_SERVER_PASSWORD="${PASSWORD:-change_me}"
 
 echo "Port: $PORT"
+echo "Password set: ${PASSWORD:+yes}"
 
 # Set HOME for opencode
 export HOME="/data"
