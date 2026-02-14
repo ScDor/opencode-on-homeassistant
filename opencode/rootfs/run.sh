@@ -9,8 +9,8 @@ REPO="anomalyco/opencode"
 # 2. Detect Architecture
 ARCH=$(bashio::info.arch)
 case $ARCH in
-    "amd64") ASSET_MATCH="linux-x64-baseline-musl.tar.gz" ;;
-    "aarch64") ASSET_MATCH="linux-arm64-musl.tar.gz" ;;
+    "amd64") ASSET_MATCH="linux-x64-baseline.tar.gz" ;;
+    "aarch64") ASSET_MATCH="linux-arm64.tar.gz" ;;
     *) bashio::log.error "Unsupported architecture: $ARCH"; exit 1 ;;
 esac
 
@@ -24,7 +24,7 @@ if ! echo "$LATEST_RELEASE" | jq -e '.assets' > /dev/null; then
     exit 1
 fi
 
-# Pick the exact matching asset
+# Pick the standard binary (not musl) for Debian compatibility
 DOWNLOAD_URL=$(echo "$LATEST_RELEASE" | jq -r ".assets[] | select(.name == \"opencode-$ASSET_MATCH\") | .browser_download_url")
 
 if [ -z "$DOWNLOAD_URL" ] || [ "$DOWNLOAD_URL" == "null" ]; then
