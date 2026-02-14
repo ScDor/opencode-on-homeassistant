@@ -1,6 +1,6 @@
 name: "OpenCode"
 description: "High-performance, self-updating AI server"
-version: "1.0.3"
+version: "1.0.4"
 slug: "opencode"
 startup: services
 arch:
