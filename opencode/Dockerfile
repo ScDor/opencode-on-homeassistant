@@ -1,16 +1,15 @@
-# Hardcode the base image to avoid ARG BUILD_FROM issues in local/custom builds
-FROM ghcr.io/hassio-addons/debian-base:latest
+FROM debian:bookworm-slim
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        curl \
-        jq \
-        ca-certificates \
-        git \
-        libstdc++6 \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    jq \
+    ca-certificates \
+    git \
+    tar \
+    libstdc++6 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY rootfs /
+COPY rootfs/run.sh /run.sh
 RUN chmod a+x /run.sh
 
 CMD [ "/run.sh" ]
