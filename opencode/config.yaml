@@ -1,6 +1,6 @@
 name: "OpenCode"
 description: "AI coding assistant"
-version: "1.3.21"
+version: "1.3.22"
 slug: "opencode"
 startup: services
 arch:
@@ -12,8 +12,11 @@ map:
   - share:rw
 ingress: true
 ingress_port: 8099
+ingress_stream: true
 panel_icon: "mdi:robot-code"
 panel_title: "OpenCode"
+ports:
+  4096/tcp: 4096
 options:
   port: 4096
 schema:
