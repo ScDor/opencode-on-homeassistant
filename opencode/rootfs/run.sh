@@ -12,4 +12,6 @@ nginx -c /etc/nginx/nginx.conf &
 # 3. Launch OpenCode
 echo "[INFO] Launching server with CORS enabled..."
 # Added --cors * to allow connections from the HA domain
+# OPENCODE_API ensures the server uses localhost instead of the external HA domain
+export OPENCODE_API="http://127.0.0.1:4096"
 exec opencode serve --port 4096 --hostname 127.0.0.1 --cors "*"
