@@ -1,6 +1,6 @@
 name: "OpenCode"
 description: "High-performance AI server (Powered by Anomalyco)"
-version: "1.2.3"
+version: "1.2.4"
 slug: "opencode"
 startup: services
 arch:

@@ -2,12 +2,15 @@ FROM ghcr.io/anomalyco/opencode:latest
 
 USER root
 
-# Move the script to a path that won't be confused with a directory
-COPY rootfs/run.sh /usr/bin/opencode-start
-RUN chmod a+x /usr/bin/opencode-start
+# Remove any existing run.sh if the base image has one that conflicts
+RUN rm -f /run.sh
 
-# Setting WORKDIR to / prevents the binary from trying to 'cd' into the script path
+# Copy script to root filesystem
+COPY rootfs/run.sh /run.sh
+RUN chmod a+x /run.sh
+
+# Force WORKDIR to / to ensure no relative path issues
 WORKDIR /
 
-ENTRYPOINT []
-CMD [ "/usr/bin/opencode-start" ]
+# Completely override any entrypoint from the base image
+ENTRYPOINT ["/bin/bash", "/run.sh"]
