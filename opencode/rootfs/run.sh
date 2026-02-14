@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "[INFO] Starting OpenCode (Zero-Install Wrapper)..."
 

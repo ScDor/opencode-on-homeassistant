@@ -2,15 +2,9 @@ FROM ghcr.io/anomalyco/opencode:latest
 
 USER root
 
-# Remove any existing run.sh if the base image has one that conflicts
-RUN rm -f /run.sh
+# Use /bin/sh because some minimal images don't include bash
+COPY rootfs/run.sh /run-opencode.sh
+RUN chmod a+x /run-opencode.sh
 
-# Copy script to root filesystem
-COPY rootfs/run.sh /run.sh
-RUN chmod a+x /run.sh
-
-# Force WORKDIR to / to ensure no relative path issues
-WORKDIR /
-
-# Completely override any entrypoint from the base image
-ENTRYPOINT ["/bin/bash", "/run.sh"]
+# Completely wipe entrypoint and use a basic shell to launch
+ENTRYPOINT ["/bin/sh", "/run-opencode.sh"]
