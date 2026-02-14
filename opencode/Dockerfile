@@ -1,14 +1,16 @@
-# Use the pre-built image as a base to ensure all libraries are present
+# Use the pre-built image as a base
 FROM ghcr.io/anomalyco/opencode:latest
 
-# We need jq to read the password from HA options
+# Revert to root to install jq and move files
 USER root
-RUN apt-get update && apt-get install -y jq && rm -rf /var/lib/apt/lists/*
+
+# Install jq for config parsing
+RUN apt-get update && apt-get install -y --no-install-recommends jq && rm -rf /var/lib/apt/lists/*
 
 COPY rootfs/run.sh /run.sh
 RUN chmod a+x /run.sh
 
-# Revert to the expected user if the base image uses one
-# USER opencode 
+# The base image likely uses 'opencode' user, but we stay root to start the server
+# and allow HA to manage the process correctly.
 
 CMD [ "/run.sh" ]
