@@ -1,4 +1,6 @@
 name: "OpenCode"
+description: "AI coding assistant"
+version: "1.0.0"
 slug: "opencode"
 startup: services
 arch:
