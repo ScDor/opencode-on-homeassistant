@@ -7,7 +7,6 @@ arch:
   - aarch64
   - amd64
 init: false
-stdin: true
 map:
   - config:rw
   - share:rw

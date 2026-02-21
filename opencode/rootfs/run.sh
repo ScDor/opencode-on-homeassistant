@@ -10,6 +10,7 @@ echo "Password set: ${PASSWORD:+yes}"
 export HOME="/data"
 export XDG_DATA_HOME="/data/.local/share"
 export XDG_CONFIG_HOME="/data/.config"
+export SHELL="/bin/bash"
 
 mkdir -p /data/.local/share/opencode /data/.config/opencode
 
