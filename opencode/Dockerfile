@@ -1,4 +1,4 @@
-FROM ghcr.io/anomalyco/opencode:beta
+FROM ghcr.io/anomalyco/opencode:latest
 
 # Install bash for terminal support
 RUN apk add --no-cache bash
