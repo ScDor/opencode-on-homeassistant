@@ -12,6 +12,11 @@ export XDG_DATA_HOME="/data/.local/share"
 export XDG_CONFIG_HOME="/data/.config"
 export SHELL="/bin/bash"
 
+# Disable telemetry/analytics to avoid CSP violations
+export OPENCODE_DISABLE_TELEMETRY="1"
+export DO_NOT_TRACK="1"
+export OPENCODE_NO_ANALYTICS="1"
+
 mkdir -p /data/.local/share/opencode /data/.config/opencode
 
 echo "Starting opencode web on 0.0.0.0:4096..."
